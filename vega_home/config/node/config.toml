@@ -1,0 +1,253 @@
+NodeMode = "full"
+MaxMemoryPercent = 33
+
+[Admin]
+  Level = "Info"
+  [Admin.Server]
+    SocketPath = "/var/folders/l7/lq57j66j6hjdllwffykpqf_h0000gn/T/vega.sock"
+    HTTPPath = "/rpc"
+
+[API]
+  Level = "Info"
+  Timeout = "5s"
+  Port = 3002
+  IP = "0.0.0.0"
+  StreamRetries = 3
+  DisableTxCommit = true
+  [API.REST]
+    Port = 3003
+    IP = "0.0.0.0"
+    Enabled = true
+    APMEnabled = true
+    [API.REST.CORS]
+      AllowedOrigins = ["*"]
+      MaxAge = 7200
+
+[Blockchain]
+  Level = "Info"
+  LogTimeDebug = true
+  LogOrderSubmitDebug = true
+  LogOrderAmendDebug = false
+  LogOrderCancelDebug = false
+  ChainProvider = "tendermint"
+  [Blockchain.Tendermint]
+    Level = "Info"
+    RPCAddr = ""
+  [Blockchain.Null]
+    Level = "Info"
+    BlockDuration = "1s"
+    TransactionsPerBlock = 10
+    GenesisFile = ""
+    IP = "localhost"
+    Port = 3101
+    SpamProtection = false
+    [Blockchain.Null.Replay]
+      Record = false
+      Replay = false
+      ReplayFile = ""
+
+[Collateral]
+  Level = "Info"
+
+[CoreAPI]
+  LogLevel = "Info"
+  Accounts = true
+  Assets = true
+  NetworkParameters = true
+  NetworkLimits = true
+  Parties = true
+  Validators = true
+  Proposals = true
+  Markets = true
+  Votes = true
+  MarketsData = true
+  PartiesStake = true
+  Delegations = true
+
+[Execution]
+  Level = "Info"
+  [Execution.Matching]
+    Level = "Info"
+    LogPriceLevelsDebug = false
+    LogRemovedOrdersDebug = false
+  [Execution.Risk]
+    Level = "Info"
+    StreamMarginLevelsVerbose = false
+  [Execution.Position]
+    Level = "Info"
+    StreamPositionVerbose = false
+  [Execution.Settlement]
+    Level = "Info"
+  [Execution.Fee]
+    Level = "Info"
+  [Execution.Liquidity]
+    Level = "Info"
+
+[Ethereum]
+  Level = "Info"
+  RPCEndpoint = ""
+  RetryDelay = "15s"
+
+[Processor]
+  Level = "Info"
+  LogOrderSubmitDebug = true
+  LogOrderAmendDebug = false
+  LogOrderCancelDebug = false
+  KeepCheckpointsMax = 20
+  [Processor.Ratelimit]
+    Requests = 500
+    PerNBlocks = 10
+  [Processor.SnapshotDebug]
+    DevEnabled = false
+    CrashAtHeight = 0
+    DebugCrashFile = "/tmp/snapshot.json"
+
+[Logging]
+  Environment = "dev"
+  [Logging.Custom]
+    [Logging.Custom.Zap]
+      Level = -1
+      Development = true
+      Encoding = "console"
+      OutputPaths = ["stdout"]
+      ErrorOutputPaths = ["stderr"]
+    [Logging.Custom.ZapEncoder]
+      CallerKey = "C"
+      EncodeCaller = "short"
+      EncodeDuration = "string"
+      EncodeLevel = "capital"
+      EncodeName = "full"
+      EncodeTime = "iso8601"
+      LevelKey = "L"
+      LineEnding = "\n"
+      MessageKey = "M"
+      NameKey = "N"
+      TimeKey = "T"
+
+[Oracles]
+  Level = "Info"
+
+[Time]
+  Level = "Info"
+
+[Epoch]
+  Level = "Info"
+
+[Metrics]
+  Level = "Info"
+  Timeout = "5s"
+  Port = 2112
+  Path = "/metrics"
+  Enabled = false
+
+[Governance]
+  Level = "Info"
+
+[NodeWallet]
+  Level = "Info"
+
+[Assets]
+  Level = "Info"
+
+[Notary]
+  Level = "Info"
+
+[EvtForward]
+  Level = "Info"
+  RetryRate = "10s"
+  KeepHashesDurationForTestOnlyDoNotChange = "48h0m0s"
+  BlockchainQueueAllowlist = []
+  [EvtForward.Ethereum]
+    Level = "Info"
+    MaxEthereumBlocks = 10000
+    PollEventRetryDuration = "20s"
+    ChainID = ""
+    SkipClientVerification = false
+  [EvtForward.EthCall]
+    Level = "Info"
+    PollEvery = "20s"
+    HeartbeatIntervalForTestOnlyDoNotChange = "1h0m0s"
+
+[Genesis]
+  Level = "Info"
+
+[Validators]
+  Level = "Info"
+  ApproxEthereumBlockTime = "15s"
+  NodeVoteResendInterval = "10s"
+
+[Banking]
+  Level = "Info"
+
+[Stats]
+  Level = "Info"
+
+[NetworkParameters]
+  Level = "Info"
+
+[Limits]
+  Level = "Info"
+
+[Checkpoint]
+  Level = "Info"
+
+[Staking]
+  Level = "Info"
+
+[Broker]
+  Level = "Info"
+  EventBusClientBufferSize = 100000
+  [Broker.Socket]
+    DialTimeout = "96h0m0s"
+    DialRetryInterval = "5s"
+    SocketQueueTimeout = "3s"
+    EventChannelBufferSize = 10000000
+    SocketChannelBufferSize = 1000000
+    MaxSendTimeouts = 10
+    Address = "127.0.0.1"
+    Port = 3005
+    Enabled = true
+    Transport = "tcp"
+  [Broker.File]
+    Enabled = false
+    File = ""
+
+[Rewards]
+  Level = "Info"
+
+[Delegation]
+  Level = "Info"
+
+[Spam]
+  Level = "Info"
+
+[PoW]
+  Level = "Info"
+
+[Snapshot]
+  Level = "Info"
+  KeepRecent = 10
+  RetryLimit = 5
+  Storage = "GOLevelDB"
+  StartHeight = 0
+
+[StateVar]
+  Level = "Info"
+
+[ERC20MultiSig]
+  Level = "Info"
+
+[ProtocolUpgrade]
+  Level = "Info"
+
+[Pprof]
+  Level = "Info"
+  Enabled = false
+  Port = 6060
+  ProfilesDir = "/tmp"
+  BlockProfileRate = 0
+  MutexProfileFraction = 0
+  WriteEvery = "15m0s"
+
+[Vesting]
+  Level = "Info"
