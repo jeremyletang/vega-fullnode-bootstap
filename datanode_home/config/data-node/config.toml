@@ -1,0 +1,189 @@
+GatewayEnabled = true
+AutoInitialiseFromNetworkHistory = false
+ChainID = "vega-mainnet-0011"
+MaxMemoryPercent = 33
+
+[Admin]
+  Level = "Info"
+  [Admin.Server]
+    SocketPath = "/var/folders/l7/lq57j66j6hjdllwffykpqf_h0000gn/T/datanode.sock"
+    HTTPPath = "/datanode/rpc"
+
+[API]
+  Level = "Info"
+  Timeout = "5s"
+  Port = 3007
+  WebUIPort = 3006
+  WebUIEnabled = false
+  Reflection = false
+  IP = "0.0.0.0"
+  StreamRetries = 3
+  CoreNodeIP = "127.0.0.1"
+  CoreNodeGRPCPort = 3002
+  MaxSubscriptionPerClient = 250
+  [API.RateLimit]
+    Enabled = true
+    TrustedProxies = ["127.0.0.1"]
+    Rate = 20.0
+    Burst = 100
+    TTL = "1h0m0s"
+    BanFor = "10m0s"
+
+[CandlesV2]
+  Level = "Info"
+  [CandlesV2.CandleStore]
+    DefaultCandleIntervals = ""
+  [CandlesV2.CandleUpdates]
+    CandleUpdatesStreamBufferSize = 100
+    CandleUpdatesStreamInterval = "1s"
+    CandlesFetchTimeout = "10s"
+    CandleUpdatesStreamSubscriptionMsgBufferSize = 100
+
+[Logging]
+  Environment = "dev"
+  [Logging.Custom]
+    [Logging.Custom.Zap]
+      Level = -1
+      Development = true
+      Encoding = "console"
+      OutputPaths = ["stdout"]
+      ErrorOutputPaths = ["stderr"]
+    [Logging.Custom.ZapEncoder]
+      CallerKey = "C"
+      EncodeCaller = "short"
+      EncodeDuration = "string"
+      EncodeLevel = "capital"
+      EncodeName = "full"
+      EncodeTime = "iso8601"
+      LevelKey = "L"
+      LineEnding = "\n"
+      MessageKey = "M"
+      NameKey = "N"
+      TimeKey = "T"
+
+[SQLStore]
+  WipeOnStartup = false
+  Level = "Info"
+  UseEmbedded = true
+  FanOutBufferSize = 1000
+  DisableMinRetentionPolicyCheckForUseInSysTestsOnly = false
+  RetentionPeriod = "1 day"
+  VerboseMigration = false
+  [SQLStore.ConnectionConfig]
+    Host = "localhost"
+    Port = 5432
+    Username = "vega"
+    Password = "vega"
+    Database = "vega"
+    SocketDir = "/tmp"
+    MaxConnLifetime = "30m0s"
+    MaxConnLifetimeJitter = "5m0s"
+    MaxConnPoolSize = 0
+    MinConnPoolSize = 0
+    [SQLStore.ConnectionConfig.RuntimeParams]
+  [SQLStore.ConnectionRetryConfig]
+    MaxRetries = 10
+    InitialInterval = "1s"
+    MaxInterval = "10s"
+    MaxElapsedTime = "1m0s"
+  [SQLStore.LogRotationConfig]
+    MaxSize = 100
+    MaxAge = 2
+
+[Gateway]
+  Port = 3008
+  IP = "0.0.0.0"
+  Level = "Info"
+  Timeout = "5s"
+  SubscriptionRetries = 3
+  GraphQLPlaygroundEnabled = true
+  MaxSubscriptionPerClient = 250
+  HTTPSEnabled = false
+  AutoCertDomain = ""
+  CertificateFile = ""
+  KeyFile = ""
+  [Gateway.Node]
+    Port = 3007
+    IP = "0.0.0.0"
+  [Gateway.GraphQL]
+    Enabled = true
+    ComplexityLimit = 0
+    Endpoint = "/graphql"
+  [Gateway.REST]
+    Enabled = true
+    APMEnabled = true
+  [Gateway.CORS]
+    AllowedOrigins = ["*"]
+    MaxAge = 7200
+  [Gateway.RateLimit]
+    Enabled = true
+    TrustedProxies = ["127.0.0.1"]
+    Rate = 20.0
+    Burst = 100
+    TTL = "1h0m0s"
+    BanFor = "10m0s"
+
+[Metrics]
+  Level = "Info"
+  Timeout = "5s"
+  Port = 2112
+  Path = "/metrics"
+  Enabled = false
+
+[Broker]
+  Level = "Info"
+  SocketServerInboundBufferSize = 10000
+  SocketServerOutboundBufferSize = 10000
+  UseEventFile = false
+  PanicOnError = false
+  UseBufferedEventSource = true
+  EventBusClientBufferSize = 100000
+  [Broker.SocketConfig]
+    IP = "0.0.0.0"
+    Port = 3005
+    MaxReceiveTimeouts = 3
+    TransportType = "tcp"
+  [Broker.FileEventSourceConfig]
+    Directory = "events"
+    TimeBetweenBlocks = "1s"
+    SendChannelBufferSize = 1000
+  [Broker.BufferedEventSourceConfig]
+    EventsPerFile = 10000000
+    SendChannelBufferSize = 10000
+    Archive = true
+    ArchiveMaximumSizeBytes = 1000000000
+
+[Service]
+  Level = "Info"
+
+[Pprof]
+  Level = "Info"
+  Enabled = false
+  Port = 6060
+  ProfilesDir = "/tmp"
+  BlockProfileRate = 0
+  MutexProfileFraction = 0
+  WriteEvery = "15m0s"
+
+[NetworkHistory]
+  Level = "Info"
+  Enabled = true
+  WipeOnStartup = false
+  Publish = true
+  FetchRetryMax = 10
+  RetryTimeout = "5s"
+  [NetworkHistory.Store]
+    PeerID = "12D3KooWCmsuiFDiucMvsNjEdvKNe84yjLR7qUUtGZonTf18EcQm"
+    PrivKey = "CAESQOblgtxOieXVpjBTD+qmX19m8i59bhpyOBENt3IcR/MMK+/yR3UzNxceC1gnA9zAfFwxpoS6VnPH7TYWTqIvIEY="
+    BootstrapPeers = []
+    SwarmPort = 4001
+    SwarmKeyOverride = ""
+    HistoryRetentionBlockSpan = 604800
+    GarbageCollectionInterval = "24h0m0s"
+  [NetworkHistory.Snapshot]
+    WaitForCreationLockTimeout = "5m0s"
+  [NetworkHistory.Initialise]
+    ToSegment = ""
+    MinimumBlockCount = 1
+    TimeOut = "1m0s"
+    GrpcAPIPorts = []

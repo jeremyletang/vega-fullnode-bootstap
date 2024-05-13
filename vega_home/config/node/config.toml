@@ -200,7 +200,7 @@ MaxMemoryPercent = 33
     MaxSendTimeouts = 10
     Address = "127.0.0.1"
     Port = 3005
-    Enabled = false
+    Enabled = true
     Transport = "tcp"
   [Broker.File]
     Enabled = false
