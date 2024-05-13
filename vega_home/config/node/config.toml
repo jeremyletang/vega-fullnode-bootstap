@@ -97,10 +97,6 @@ MaxMemoryPercent = 33
   [Processor.Ratelimit]
     Requests = 500
     PerNBlocks = 10
-  [Processor.SnapshotDebug]
-    DevEnabled = false
-    CrashAtHeight = 0
-    DebugCrashFile = "/tmp/snapshot.json"
 
 [Logging]
   Environment = "dev"
@@ -161,8 +157,6 @@ MaxMemoryPercent = 33
     Level = "Info"
     MaxEthereumBlocks = 10000
     PollEventRetryDuration = "20s"
-    ChainID = ""
-    SkipClientVerification = false
   [EvtForward.EthCall]
     Level = "Info"
     PollEvery = "20s"
@@ -206,7 +200,7 @@ MaxMemoryPercent = 33
     MaxSendTimeouts = 10
     Address = "127.0.0.1"
     Port = 3005
-    Enabled = true
+    Enabled = false
     Transport = "tcp"
   [Broker.File]
     Enabled = false
